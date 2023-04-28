@@ -1,0 +1,72 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.leaflet-container {
+    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+}
+
+.legend {
+    text-align: left;
+    line-height: 18px;
+    color: #333333;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, .5);
+    padding: 5px;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 1;
+    /* border: 1px solid black; */
+}
+
+.leaflet-tooltip{
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: none !important;
+    box-shadow: none !important;
+    
+}
+.region-label-tooltip{
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+     margin-top: 28px;
+    margin-left: -10px;
+}
+.county-label-tooltip{
+    font-size: 10px;
+}
+
+.leaflet-control-attribution{
+    display: none !important;
+}
+
+.popupCustom{
+    border: none;
+    font-size: 10px;
+}
+
+.leaflet-control-locate {
+    z-index: 1000;
+}
+.leaflet-control-locate .fa-spinner {
+    margin-top: 3px;
+    margin-left: 1px;
+}
+.leaflet-bar {
+    margin-top: 5px;
+}
