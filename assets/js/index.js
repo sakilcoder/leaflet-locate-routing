@@ -38,7 +38,7 @@ var sidebar = L.control.sidebar('sidebar', {
     position: 'left'
 });
 map.addControl(sidebar);
-sidebar.show();
+// sidebar.show();
 
 var routingButton = L.easyButton('fa fa-road', function () {
     sidebar.toggle();
