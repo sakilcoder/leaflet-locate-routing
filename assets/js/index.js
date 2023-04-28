@@ -2,7 +2,7 @@
 // L.Control.Zoom.prototype.options.position = 'topright';
 var map = L.map('map').setView([23, 90], 16);
 
-map.zoomControl.setPosition('topright');
+// map.zoomControl.setPosition('topright');
 
 
 // var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -32,13 +32,18 @@ var baseLayers = {
 };
 
 var layerControl = L.control.layers(baseLayers).addTo(map);
-layerControl.setPosition('bottomright');
+// layerControl.setPosition('bottomright');
 
 var sidebar = L.control.sidebar('sidebar', {
     position: 'left'
 });
 map.addControl(sidebar);
 sidebar.show();
+
+var routingButton = L.easyButton('fa fa-road', function () {
+    sidebar.toggle();
+}).addTo(map);
+
 
 var clickedLatLng;
 var currentLatLng;
@@ -54,7 +59,7 @@ let locateControl = L.control.locate({
     drawCircle: false,
     showPopup: false,
     flyTo: true,
-    position: 'topright',
+    // position: 'topright',
     follow: true,
     setView: true,
     showCompass: true,
@@ -64,15 +69,16 @@ var onLocationFound = function (e) {
     currentLatLng = e.latlng;
     console.log(currentLatLng);
 
-    if(!clickedLatLng){
+    if (!clickedLatLng) {
         return;
     }
 
-    if(routeControl){
+    if (routeControl) {
         map.removeControl(routeControl);
     }
     findRoute(currentLatLng, clickedLatLng);
-    
+    sidebar.show();
+
 };
 map.on('locationfound', onLocationFound);
 
@@ -84,32 +90,32 @@ map.on('locationerror', function (e) {
 map.on('click', function (e) {
     clickedLatLng = e.latlng;
     console.log(clickedLatLng);
-    if(clickedMarker){
+    if (clickedMarker) {
         map.removeLayer(clickedMarker);
     }
-    clickedMarker=L.marker(clickedLatLng).addTo(map);
+    clickedMarker = L.marker(clickedLatLng).addTo(map);
 
-    if(!currentLatLng){
+    if (!currentLatLng) {
         return;
     }
 
-    if(routeControl){
+    if (routeControl) {
         map.removeControl(routeControl);
     }
     findRoute(currentLatLng, clickedLatLng);
-    
+    sidebar.show();
 
 });
 
-let findRoute=function(start, end){
+let findRoute = function (start, end) {
     let waypoints = [];
-    if(start && end){
-        waypoints= [
+    if (start && end) {
+        waypoints = [
             L.latLng(start.lat, start.lng),
             L.latLng(end.lat, end.lng)
         ]
     }
-    routeControl = L.Routing.control(L.extend(window.lrmConfig,{
+    routeControl = L.Routing.control(L.extend(window.lrmConfig, {
         waypoints: waypoints,
         geocoder: L.Control.Geocoder.nominatim(),
         routeWhileDragging: true,
