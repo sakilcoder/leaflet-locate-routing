@@ -77,7 +77,7 @@ var onLocationFound = function (e) {
         map.removeControl(routeControl);
     }
     findRoute(currentLatLng, clickedLatLng);
-    sidebar.show();
+    // sidebar.show();
 
 };
 map.on('locationfound', onLocationFound);
